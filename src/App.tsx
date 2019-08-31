@@ -1,26 +1,31 @@
+import mermaid from 'mermaid';
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const App: React.FC = () => {
+  React.useEffect(() => {
+    mermaid.initialize({
+      theme: 'dark',
+    });
+  }, []);
+
+  const graph = `
+  graph TD
+    A[John]-->|manages|B(Bob)
+    A-->|consults|C{Chris}
+    B-->|mentors|D((Dustin))
+    C-->|advises|D
+    D-->|looks up to|E>Evan]
+    E-->|is|A
+  `;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="mermaid" style={{ textAlign: 'center' }}>
+        {graph}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
